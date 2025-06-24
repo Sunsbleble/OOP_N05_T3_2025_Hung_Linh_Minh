@@ -70,5 +70,5 @@
 # Thành viên:
 1. Trần Gia Hưng, MSV: 24100078
 2. Nguyễn Xuân Minh, MSV: 24100172
-3. Bùi Đoàn Phương Linh, MSV: 24100078
+3. Bùi Đoàn Phương Linh, MSV: 24100234
 4. Nguyễn Lệ Thu
