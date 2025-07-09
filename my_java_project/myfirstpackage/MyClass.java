@@ -1,4 +1,4 @@
-package myfirstpackage;
+package my_java_project.myfirstpackage;
 
 public class MyClass {
     public void sayHello(){
