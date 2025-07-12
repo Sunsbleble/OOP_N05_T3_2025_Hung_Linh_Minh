@@ -100,7 +100,7 @@ public class BookCRUD {
 
         Book newBook = new Book(id, title, author, publisher, year, category, quantity);
         bookList.add(newBook);
-        System.out.println("✅ Book added successfully!");
+        System.out.println(" Book added successfully!");
     }
 
     private static void viewBook() {
@@ -112,7 +112,7 @@ public class BookCRUD {
                 return;
             }
         }
-        System.out.println("❌ Book not found.");
+        System.out.println("Book not found.");
     }
 
     private static void updateBook() {
@@ -146,11 +146,11 @@ public class BookCRUD {
                 String quantity = scanner.nextLine();
                 if (!quantity.isEmpty()) book.setQuantity(Integer.parseInt(quantity));
 
-                System.out.println("✅ Book updated successfully!");
+                System.out.println("Book updated successfully!");
                 return;
             }
         }
-        System.out.println("❌ Book not found.");
+        System.out.println("Book not found.");
     }
 
     private static void deleteBook() {
@@ -163,6 +163,6 @@ public class BookCRUD {
                 return;
             }
         }
-        System.out.println("❌ Book not found.");
+        System.out.println("Book not found.");
     }
 }
