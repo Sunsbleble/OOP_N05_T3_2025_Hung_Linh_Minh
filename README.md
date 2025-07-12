@@ -1,5 +1,8 @@
 # OOP_N05_T3_2025_GROUP_Hung_Linh_Minh
 Ứng dụng quản lý sách thư viện
+
+<img width="660" height="421" alt="project vpd (3)" src="https://github.com/user-attachments/assets/da348b0c-4bfd-400c-a259-4152b325f85d" />
+
 # Describe and Analyse the Project
 ## Đối tượng:
 ### 1. Sách (Book)
@@ -7,6 +10,7 @@
 + Mã sách (bookID): Mỗi sách sẽ có một mã duy nhất.
 
 + Tên sách (title): Tên của cuốn sách.
+
 
 + Tác giả (author): Tác giả của cuốn sách.
 
