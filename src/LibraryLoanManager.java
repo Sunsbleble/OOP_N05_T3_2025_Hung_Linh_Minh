@@ -149,7 +149,7 @@ public class LibraryLoanManager {
         book.decreaseQuantity();
         member.borrowBook(book);
 
-        System.out.println("✅ Mượn sách thành công.");
+        System.out.println("Mượn sách thành công.");
     }
 
     private static void readLoan() {
@@ -177,7 +177,7 @@ public class LibraryLoanManager {
         Date newReturnDate = cal.getTime();
 
         loans.put(loanID, new Loan(loan.getLoanID(), loan.getBook(), loan.getMember(), new Date(), newReturnDate));
-        System.out.println("✅ Đã cập nhật thông tin mượn sách.");
+        System.out.println("Đã cập nhật thông tin mượn sách.");
     }
 
     private static void deleteLoan() {
@@ -196,6 +196,6 @@ public class LibraryLoanManager {
         member.returnBook(book);
         loans.remove(loanID);
 
-        System.out.println("✅ Trả sách thành công.");
+        System.out.println("Trả sách thành công.");
     }
 }
