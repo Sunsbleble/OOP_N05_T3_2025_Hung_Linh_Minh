@@ -8,6 +8,8 @@
 ## Sơ đồ thuật toán:
 BookCRUD:
 <img width="1836" height="701" alt="w" src="https://github.com/user-attachments/assets/924231f0-713a-4de2-a654-f2696fdc9ba8" />
+Membercrud:
+<img width="491" height="534" alt="Untitled (1)" src="https://github.com/user-attachments/assets/e76b95a2-96df-4db4-816c-c6f2b3880208" />
 
 
 
