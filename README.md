@@ -2,7 +2,8 @@
 Ứng dụng quản lý sách thư viện
 
 ## Sơ đồ chức năng:
-<img width="660" height="421" alt="project vpd (3)" src="https://github.com/user-attachments/assets/da348b0c-4bfd-400c-a259-4152b325f85d" />
+<img width="603" height="379" alt="Untitled (1)" src="https://github.com/user-attachments/assets/95a95a80-605d-402f-8ee9-b737d1a094bf" />
+
 
 ## Sơ đồ thuật toán:
 <img width="348" height="575" alt="515854980_2206650783113886_8801041328317978693_n" src="https://github.com/user-attachments/assets/a0311b2f-9105-4ad3-bc9b-f3127692ed50" />
