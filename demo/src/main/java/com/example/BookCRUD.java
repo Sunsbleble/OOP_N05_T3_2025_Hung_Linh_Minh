@@ -159,7 +159,7 @@ public class BookCRUD {
         for (Book book : bookList) {
             if (book.getBookID().equalsIgnoreCase(id)) {
                 bookList.remove(book);
-                System.out.println("🗑️ Book deleted successfully!");
+                System.out.println(" Book deleted successfully!");
                 return;
             }
         }
