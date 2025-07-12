@@ -20,8 +20,6 @@ class Book {
         this.category = category;
         this.quantity = quantity;
     }
-
-    // Getters & setters
     public String getBookID() { return bookID; }
     public void setBookID(String bookID) { this.bookID = bookID; }
 
