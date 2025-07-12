@@ -7,7 +7,8 @@
 
 ## Sơ đồ thuật toán:
 BookCRUD:
-<img width="1832" height="733" alt="Capture" src="https://github.com/user-attachments/assets/900421ca-083e-4ed3-ade2-af4aa003246f" />
+<img width="1836" height="701" alt="w" src="https://github.com/user-attachments/assets/924231f0-713a-4de2-a654-f2696fdc9ba8" />
+
 
 
 
