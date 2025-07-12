@@ -6,7 +6,10 @@
 
 
 ## Sơ đồ thuật toán:
-<img width="348" height="575" alt="515854980_2206650783113886_8801041328317978693_n" src="https://github.com/user-attachments/assets/a0311b2f-9105-4ad3-bc9b-f3127692ed50" />
+BookCRUD:
+<img width="1832" height="733" alt="Capture" src="https://github.com/user-attachments/assets/900421ca-083e-4ed3-ade2-af4aa003246f" />
+
+
 
 # Describe and Analyse the Project
 ## Đối tượng:
