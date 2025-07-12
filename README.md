@@ -11,6 +11,8 @@ BookCRUD:
 Membercrud:
 <img width="491" height="534" alt="Untitled (1)" src="https://github.com/user-attachments/assets/e76b95a2-96df-4db4-816c-c6f2b3880208" />
 
+LoanCRUD:
+<img width="926" height="706" alt="Untitled" src="https://github.com/user-attachments/assets/9e888296-ea51-4f53-92c8-be65c93d00e6" />
 
 
 
