@@ -44,9 +44,7 @@
 
 + Địa chỉ (address): Địa chỉ của người đọc.
 
-+ Số điện thoại (phone): Số điện thoại liên hệ.
-
-+ Danh sách sách mượn (borrowedBooks): Danh sách các sách mà người đọc đã mượn
++ Số điện thoại (phone): Số điện thoại liên hệ
 
 ### 4. Mượn sách (Loan)
 
@@ -59,6 +57,8 @@
 + Ngày mượn (borrowDate): Ngày sách được mượn.
 
 + Ngày trả (returnDate): Ngày sách cần phải trả.
+
+ + Danh sách sách mượn (borrowedBooks): Danh sách các sách mà người đọc đã mượn
 
 ### 5. Quản lý hệ thống (SystemManager)
 
