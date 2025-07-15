@@ -5,10 +5,14 @@ class Book {
     private String title;
     private int quantity;
 
-    public Book(String bookID, String title, int quantity) {
+    public Book(String bookID, String title, String string, String string2, int quantity, String string3, int i) {
         this.bookID = bookID;
         this.title = title;
         this.quantity = quantity;
+    }
+
+    public Book(String string, String string2) {
+        //TODO Auto-generated constructor stub
     }
 
     public String getBookID() { return bookID; }
@@ -26,22 +30,22 @@ class Book {
 class Member {
     private String memberID;
     private String name;
-    private List<Book> borrowedBooks = new ArrayList<>();
+    private List<Books> borrowedBooks = new ArrayList<>();
 
-    public Member(String memberID, String name) {
+    public Member(String memberID, String name, String string, String string2) {
         this.memberID = memberID;
         this.name = name;
     }
 
     public String getMemberID() { return memberID; }
     public String getName() { return name; }
-    public List<Book> getBorrowedBooks() { return borrowedBooks; }
+    public List<Books> getBorrowedBooks() { return borrowedBooks; }
 
-    public void borrowBook(Book book) {
+    public void borrowBook(Books book) {
         borrowedBooks.add(book);
     }
 
-    public void returnBook(Book book) {
+    public void returnBook(Books book) {
         borrowedBooks.remove(book);
     }
 
@@ -53,12 +57,12 @@ class Member {
 
 class Loan {
     private String loanID;
-    private Book book;
+    private Books book;
     private Member member;
     private Date borrowDate;
     private Date returnDate;
 
-    public Loan(String loanID, Book book, Member member, Date borrowDate, Date returnDate) {
+    public Loan(String loanID, Books book, Member member, Date borrowDate, Date returnDate) {
         this.loanID = loanID;
         this.book = book;
         this.member = member;
@@ -67,7 +71,7 @@ class Loan {
     }
 
     public String getLoanID() { return loanID; }
-    public Book getBook() { return book; }
+    public Books getBook() { return book; }
     public Member getMember() { return member; }
 
     @Override
@@ -77,15 +81,15 @@ class Loan {
 }
 
 public class LibraryLoanManager {
-    private static Map<String, Book> books = new HashMap<>();
+    private static Map<String, Books> books = new HashMap<>();
     private static Map<String, Member> members = new HashMap<>();
     private static Map<String, Loan> loans = new HashMap<>();
     private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         // Thêm dữ liệu mẫu
-        books.put("B01", new Book("B01", "Lập trình Java", 3));
-        books.put("B02", new Book("B02", "Cấu trúc dữ liệu", 2));
+        books.put("B01", new Books("B01", "Lập trình Java", 3));
+        books.put("B02", new Books("B02", "Cấu trúc dữ liệu", 2));
         members.put("M01", new Member("M01", "Nguyễn Văn A"));
         members.put("M02", new Member("M02", "Trần Thị B"));
 
@@ -128,7 +132,7 @@ public class LibraryLoanManager {
             return;
         }
 
-        Book book = books.get(bookID);
+        Books book = books.get(bookID);
         if (book == null) {
             System.out.println("Không tìm thấy sách.");
             return;
@@ -189,7 +193,7 @@ public class LibraryLoanManager {
             return;
         }
 
-        Book book = loan.getBook();
+        Books book = loan.getBook();
         Member member = loan.getMember();
 
         book.increaseQuantity();
