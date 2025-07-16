@@ -1,3 +1,5 @@
+import bth.Book;
+
 public class BookTest {
     public static void runTests() {
         System.out.println("Chạy test cho Book:");

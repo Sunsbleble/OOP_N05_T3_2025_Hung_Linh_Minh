@@ -1,40 +1,47 @@
-import java.util.ArrayList;
-import java.util.List;
 
 public class Member {
-    private String maNguoiDoc;
-    private String ten;
-    private String diaChi;
-    private String soDienThoai;
-    private List<Borrowing> danhSachMuon;  // Danh sách các phiếu mượn
+    private String memberID;   // Mã người đọc duy nhất
+    private String name;       // Tên người đọc
+    private String address;    // Địa chỉ
+    private String phone;      // Số điện thoại
 
-    public Member(String maNguoiDoc, String ten, String diaChi, String soDienThoai) {
-        this.maNguoiDoc = maNguoiDoc;
-        this.ten = ten;
-        this.diaChi = diaChi;
-        this.soDienThoai = soDienThoai;
-        this.danhSachMuon = new ArrayList<>();
+    public Member(String memberID, String name, String address, String phone) {
+        this.memberID = memberID;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
     }
 
     // Getter và Setter
-    public String getMaNguoiDoc() { return maNguoiDoc; }
-    public String getTen() { return ten; }
-    public String getDiaChi() { return diaChi; }
-    public String getSoDienThoai() { return soDienThoai; }
-    public List<Borrowing> getDanhSachMuon() { return danhSachMuon; }
-
-    public void muonSach(Borrowing borrowing) {
-        danhSachMuon.add(borrowing);
+    public String getMemberID() {
+        return memberID;
     }
 
-    @Override
-    public String toString() {
-        return "Member{" +
-                "maNguoiDoc='" + maNguoiDoc + '\'' +
-                ", ten='" + ten + '\'' +
-                ", diaChi='" + diaChi + '\'' +
-                ", soDienThoai='" + soDienThoai + '\'' +
-                ", số sách mượn=" + danhSachMuon.size() +
-                '}';
+    public void setMemberID(String memberID) {
+        this.memberID = memberID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

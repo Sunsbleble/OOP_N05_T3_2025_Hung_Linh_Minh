@@ -1,6 +1,10 @@
+package bth;
+import java.time.LocalDate;
 import java.util.*;
 
-class Book {
+import Books;
+
+public class Book {
     private String bookID;
     private String title;
     private int quantity;
@@ -25,9 +29,29 @@ class Book {
     public String toString() {
         return "[" + bookID + "] " + title + " (Còn: " + quantity + ")";
     }
+
+    public boolean isAvailable() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isAvailable'");
+    }
+
+    public void borrowBook() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'borrowBook'");
+    }
+
+    public void returnBook() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'returnBook'");
+    }
+
+    public boolean isEmpty() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
+    }
 }
 
-class Member {
+public class Member {
     private String memberID;
     private String name;
     private List<Books> borrowedBooks = new ArrayList<>();
@@ -55,7 +79,7 @@ class Member {
     }
 }
 
-class Loan {
+public class Loan {
     private String loanID;
     private Books book;
     private Member member;
@@ -70,6 +94,10 @@ class Loan {
         this.returnDate = returnDate;
     }
 
+    public Loan(String loanID2, Member member2, LocalDate borrowDate2, LocalDate returnDate2) {
+        //TODO Auto-generated constructor stub
+    }
+
     public String getLoanID() { return loanID; }
     public Books getBook() { return book; }
     public Member getMember() { return member; }
@@ -77,6 +105,31 @@ class Loan {
     @Override
     public String toString() {
         return "[" + loanID + "] " + member.getName() + " mượn '" + book.getTitle() + "' từ " + borrowDate + " đến " + returnDate;
+    }
+
+    public void setBorrowDate(LocalDate newBorrowDate) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setBorrowDate'");
+    }
+
+    public void setReturnDate(LocalDate newReturnDate) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setReturnDate'");
+    }
+
+    public void addBook(Book book2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addBook'");
+    }
+
+    public Object getBorrowedBooks() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getBorrowedBooks'");
+    }
+
+    public Object getBorrowedBook() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getBorrowedBook'");
     }
 }
 

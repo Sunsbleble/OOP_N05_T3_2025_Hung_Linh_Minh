@@ -1,5 +1,7 @@
 import java.util.Date;
 
+import bth.Member;
+
 public class MemberTest {
     public static void runTests() {
         System.out.println("\nChạy test cho Member:");
