@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MemberCRUD {
     // Lớp đại diện cho Người đọc
     static class Member {
         private String id;
@@ -134,4 +133,3 @@ public class MemberCRUD {
         }
         return null;
     }
-}
