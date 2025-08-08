@@ -1,8 +1,8 @@
+package com.example.servingwebcontent.model;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-package com.example.servingwebcontent.model;
 
 
 public class Member {
