@@ -60,13 +60,7 @@ LoanCRUD:
 
  + Danh sách sách mượn (borrowedBooks): Danh sách các sách mà người đọc đã mượn
 
-### 4. Quản lý hệ thống (SystemManager)
-
-+ Danh sách thư viện (libraries): Danh sách các thư viện (nếu có hệ thống quản lý nhiều thư viện).
-
-+ Danh sách bạn đọc (members): Danh sách các bạn đọc trong hệ thống.
-
-### 5. Phạt (Fine)
+### 4. Phạt (Fine)
 
 + Mã phạt (fineID): Mã duy nhất của khoản phạt.
 
