@@ -1,8 +1,8 @@
+package com.example.servingwebcontent.controller;
+
 import com.example.servingwebcontent.model.Fine;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
-
-package com.example.servingwebcontent.controller;
 
 
 

@@ -12,7 +12,7 @@ public class Fine {
     private String reason;
 
     // In-memory storage for CRUD operations
-    private static final Map<String, Fine> fines = new HashMap<>();
+    public static final Map<String, Fine> fines = new HashMap<>();
 
     public Fine(String member, double amount, String reason) {
         this.fineID = UUID.randomUUID().toString();
