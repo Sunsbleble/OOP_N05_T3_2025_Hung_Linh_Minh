@@ -36,17 +36,7 @@ LoanCRUD:
 
 + Số lượng (quantity): Số lượng sách có trong thư viện.
 
-### 2. Thư viện (Library)
-
-+ Tên thư viện (libraryName): Tên của thư viện.
-
-+ Địa chỉ (address): Địa chỉ của thư viện.
-
-+ Danh sách sách (books): Danh sách các cuốn sách có trong thư viện.
-
-+ Danh sách bạn đọc (members): Danh sách người sử dụng thư viện.
-
-### 3. Người đọc (Member)
+### 2. Người đọc (Member)
 
 + Mã người đọc (memberID): Mã duy nhất của bạn đọc.
 
@@ -56,7 +46,7 @@ LoanCRUD:
 
 + Số điện thoại (phone): Số điện thoại liên hệ
 
-### 4. Mượn sách (Loan)
+### 3. Mượn sách (Loan)
 
 + Mã mượn (loanID): Mã duy nhất của giao dịch mượn sách.
 
@@ -70,13 +60,13 @@ LoanCRUD:
 
  + Danh sách sách mượn (borrowedBooks): Danh sách các sách mà người đọc đã mượn
 
-### 5. Quản lý hệ thống (SystemManager)
+### 4. Quản lý hệ thống (SystemManager)
 
 + Danh sách thư viện (libraries): Danh sách các thư viện (nếu có hệ thống quản lý nhiều thư viện).
 
 + Danh sách bạn đọc (members): Danh sách các bạn đọc trong hệ thống.
 
-### 6. Phạt (Fine)
+### 5. Phạt (Fine)
 
 + Mã phạt (fineID): Mã duy nhất của khoản phạt.
 
