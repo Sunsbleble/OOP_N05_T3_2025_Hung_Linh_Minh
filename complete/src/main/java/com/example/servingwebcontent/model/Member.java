@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 public class Member {
     private String memberID;
     private String name;
@@ -18,72 +17,37 @@ public class Member {
         this.phone = phone;
     }
 
-    public String getMemberID() {
-        return memberID;
-    }
+    public String getMemberID() { return memberID; }
+    public void setMemberID(String memberID) { this.memberID = memberID; }
 
-    public void setMemberID(String memberID) {
-        this.memberID = memberID;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getName() {
-        return name;
-    }
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    // CRUD operations using in-memory list
     private static final List<Member> members = new ArrayList<>();
 
-    // Create
-    public static void addMember(Member member) {
-        members.add(member);
+    public static void addMember(Member member) { members.add(member); }
+    public static List<Member> getAllMembers() { return new ArrayList<>(members); }
+    public static Optional<Member> getMemberByID(String id) {
+        return members.stream().filter(m -> m.getMemberID().equals(id)).findFirst();
     }
-
-    // Read
-    public static List<Member> getAllMembers() {
-        return new ArrayList<>(members);
-    }
-
-    public static Optional<Member> getMemberByID(String memberID) {
-        return members.stream()
-                .filter(m -> m.getMemberID().equals(memberID))
-                .findFirst();
-    }
-
-    // Update
-    public static boolean updateMember(String memberID, String name, String address, String phone) {
-        Optional<Member> opt = getMemberByID(memberID);
+    public static boolean updateMember(String id, Member updated) {
+        Optional<Member> opt = getMemberByID(id);
         if (opt.isPresent()) {
             Member m = opt.get();
-            m.setName(name);
-            m.setAddress(address);
-            m.setPhone(phone);
+            m.setName(updated.getName());
+            m.setAddress(updated.getAddress());
+            m.setPhone(updated.getPhone());
             return true;
         }
         return false;
     }
-
-    // Delete
-    public static boolean deleteMember(String memberID) {
-        return members.removeIf(m -> m.getMemberID().equals(memberID));
+    public static boolean deleteMember(String id) {
+        return members.removeIf(m -> m.getMemberID().equals(id));
     }
 }

@@ -1,109 +1,59 @@
 package com.example.servingwebcontent.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
 
 public class Loan {
     private String loanID;
-    private Book book;
-    private Member member;
-    private LocalDate borrowDate;
-    private LocalDate returnDate;
-    private List<Book> borrowedBooks;
+    private String bookID;   // Sách mượn
+    private String memberID; // Người mượn
+    private String borrowDate;
+    private String returnDate;
 
-    public Loan(String loanID, Book book, Member member, LocalDate borrowDate, LocalDate returnDate) {
+    public Loan(String loanID, String bookID, String memberID, String borrowDate, String returnDate) {
         this.loanID = loanID;
-        this.book = book;
-        this.member = member;
+        this.bookID = bookID;
+        this.memberID = memberID;
         this.borrowDate = borrowDate;
         this.returnDate = returnDate;
-        this.borrowedBooks = new ArrayList<>();
     }
 
-    public Loan(String maLoan, String tenLoan, double soTien, double laiSuat) {
-        
-    }
+    public String getLoanID() { return loanID; }
+    public void setLoanID(String loanID) { this.loanID = loanID; }
 
-    // Getters and Setters
-    public String getLoanID() {
-        return loanID;
-    }
+    public String getBookID() { return bookID; }
+    public void setBookID(String bookID) { this.bookID = bookID; }
 
-    public void setLoanID(String loanID) {
-        this.loanID = loanID;
-    }
+    public String getMemberID() { return memberID; }
+    public void setMemberID(String memberID) { this.memberID = memberID; }
 
-    public Book getBook() {
-        return book;
-    }
+    public String getBorrowDate() { return borrowDate; }
+    public void setBorrowDate(String borrowDate) { this.borrowDate = borrowDate; }
 
-    public void setBook(Book book) {
-        this.book = book;
-    }
+    public String getReturnDate() { return returnDate; }
+    public void setReturnDate(String returnDate) { this.returnDate = returnDate; }
 
-    public Member getMember() {
-        return member;
-    }
+    private static final List<Loan> loans = new ArrayList<>();
 
-    public void setMember(Member member) {
-        this.member = member;
+    public static void addLoan(Loan loan) { loans.add(loan); }
+    public static List<Loan> getAllLoans() { return new ArrayList<>(loans); }
+    public static Optional<Loan> getLoanByID(String id) {
+        return loans.stream().filter(l -> l.getLoanID().equals(id)).findFirst();
     }
-
-    public LocalDate getBorrowDate() {
-        return borrowDate;
-    }
-
-    public void setBorrowDate(LocalDate borrowDate) {
-        this.borrowDate = borrowDate;
-    }
-
-    public LocalDate getReturnDate() {
-        return returnDate;
-    }
-
-    public void setReturnDate(LocalDate returnDate) {
-        this.returnDate = returnDate;
-    }
-
-    public List<Book> getBorrowedBooks() {
-        return borrowedBooks;
-    }
-
-    // CRUD for borrowedBooks
-    // Create (Add)
-    public void addBorrowedBook(Book book) {
-        borrowedBooks.add(book);
-    }
-
-    // Read
-    public Book getBorrowedBook(int index) {
-        if (index >= 0 && index < borrowedBooks.size()) {
-            return borrowedBooks.get(index);
-        }
-        return null;
-    }
-
-    // Update
-    public boolean updateBorrowedBook(int index, Book newBook) {
-        if (index >= 0 && index < borrowedBooks.size()) {
-            borrowedBooks.set(index, newBook);
+    public static boolean updateLoan(String id, Loan updated) {
+        Optional<Loan> opt = getLoanByID(id);
+        if (opt.isPresent()) {
+            Loan l = opt.get();
+            l.setBookID(updated.getBookID());
+            l.setMemberID(updated.getMemberID());
+            l.setBorrowDate(updated.getBorrowDate());
+            l.setReturnDate(updated.getReturnDate());
             return true;
         }
         return false;
     }
-
-    // Delete
-    public boolean removeBorrowedBook(Book book) {
-        return borrowedBooks.remove(book);
-    }
-
-    public boolean removeBorrowedBook(int index) {
-        if (index >= 0 && index < borrowedBooks.size()) {
-            borrowedBooks.remove(index);
-            return true;
-        }
-        return false;
+    public static boolean deleteLoan(String id) {
+        return loans.removeIf(l -> l.getLoanID().equals(id));
     }
 }

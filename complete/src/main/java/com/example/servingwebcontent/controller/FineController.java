@@ -1,48 +1,40 @@
 package com.example.servingwebcontent.controller;
 
 import com.example.servingwebcontent.model.Fine;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.Collection;
 
-
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/fines")
 public class FineController {
 
-    // Create a new fine
-    @PostMapping
-    public Fine createFine(@RequestParam String member,
-                           @RequestParam double amount,
-                           @RequestParam String reason) {
-        return Fine.createFine(member, amount, reason);
-    }
-
-    // Get a fine by ID
-    @GetMapping("/{fineID}")
-    public Fine getFine(@PathVariable String fineID) {
-        return Fine.getFine(fineID);
-    }
-
-    // Update a fine
-    @PutMapping("/{fineID}")
-    public boolean updateFine(@PathVariable String fineID,
-                              @RequestParam String member,
-                              @RequestParam double amount,
-                              @RequestParam String reason) {
-        return Fine.updateFine(fineID, member, amount, reason);
-    }
-
-    // Delete a fine
-    @DeleteMapping("/{fineID}")
-    public boolean deleteFine(@PathVariable String fineID) {
-        return Fine.deleteFine(fineID);
-    }
-
-    // Get all fines
     @GetMapping
-    public Collection<Fine> getAllFines() {
-        // Expose all fines for listing
-        return Fine.fines.values();
+    public List<Fine> getAllFines() { return Fine.getAllFines(); }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Fine> getFineById(@PathVariable String id) {
+        Optional<Fine> fine = Fine.getFineByID(id);
+        return fine.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<String> addFine(@RequestBody Fine fine) {
+        Fine.addFine(fine);
+        return ResponseEntity.ok("Fine added successfully");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateFine(@PathVariable String id, @RequestBody Fine updated) {
+        boolean updatedStatus = Fine.updateFine(id, updated);
+        return updatedStatus ? ResponseEntity.ok("Fine updated") : ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteFine(@PathVariable String id) {
+        boolean deleted = Fine.deleteFine(id);
+        return deleted ? ResponseEntity.ok("Fine deleted") : ResponseEntity.notFound().build();
     }
 }

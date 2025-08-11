@@ -1,6 +1,6 @@
 package com.example.servingwebcontent.database;
 
-import com.example.library.model.Member;
+import com.example.servingwebcontent.model.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

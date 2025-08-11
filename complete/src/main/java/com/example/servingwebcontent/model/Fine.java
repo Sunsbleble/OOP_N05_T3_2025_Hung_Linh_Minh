@@ -1,81 +1,53 @@
 package com.example.servingwebcontent.model;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class Fine {
     private String fineID;
-    private String member;
+    private String memberID;
     private double amount;
     private String reason;
 
-    // In-memory storage for CRUD operations
-    public static final Map<String, Fine> fines = new HashMap<>();
-
-    public Fine(String member, double amount, String reason) {
-        this.fineID = UUID.randomUUID().toString();
-        this.member = member;
+    public Fine(String fineID, String memberID, double amount, String reason) {
+        this.fineID = fineID;
+        this.memberID = memberID;
         this.amount = amount;
         this.reason = reason;
     }
 
-    // Create
-    public static Fine createFine(String member, double amount, String reason) {
-        Fine fine = new Fine(member, amount, reason);
-        fines.put(fine.getFineID(), fine);
-        return fine;
-    }
+    public String getFineID() { return fineID; }
+    public void setFineID(String fineID) { this.fineID = fineID; }
 
-    // Read
-    public static Fine getFine(String fineID) {
-        return fines.get(fineID);
-    }
+    public String getMemberID() { return memberID; }
+    public void setMemberID(String memberID) { this.memberID = memberID; }
 
-    // Update
-    public static boolean updateFine(String fineID, String member, double amount, String reason) {
-        Fine fine = fines.get(fineID);
-        if (fine != null) {
-            fine.setMember(member);
-            fine.setAmount(amount);
-            fine.setReason(reason);
+    public double getAmount() { return amount; }
+    public void setAmount(double amount) { this.amount = amount; }
+
+    public String getReason() { return reason; }
+    public void setReason(String reason) { this.reason = reason; }
+
+    private static final List<Fine> fines = new ArrayList<>();
+
+    public static void addFine(Fine fine) { fines.add(fine); }
+    public static List<Fine> getAllFines() { return new ArrayList<>(fines); }
+    public static Optional<Fine> getFineByID(String id) {
+        return fines.stream().filter(f -> f.getFineID().equals(id)).findFirst();
+    }
+    public static boolean updateFine(String id, Fine updated) {
+        Optional<Fine> opt = getFineByID(id);
+        if (opt.isPresent()) {
+            Fine f = opt.get();
+            f.setMemberID(updated.getMemberID());
+            f.setAmount(updated.getAmount());
+            f.setReason(updated.getReason());
             return true;
         }
         return false;
     }
-
-    // Delete
-    public static boolean deleteFine(String fineID) {
-        return fines.remove(fineID) != null;
-    }
-
-    // Getters and Setters
-    public String getFineID() {
-        return fineID;
-    }
-
-    public String getMember() {
-        return member;
-    }
-
-    public void setMember(String member) {
-        this.member = member;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
+    public static boolean deleteFine(String id) {
+        return fines.removeIf(f -> f.getFineID().equals(id));
     }
 }

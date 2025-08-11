@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 public class Book {
     private String bookID;
     private String title;
@@ -12,17 +11,20 @@ public class Book {
     private String publisher;
     private int yearPublished;
     private String category;
+    private int quantity;
 
-    public Book(String bookID, String title, String author, String publisher, int yearPublished, String category) {
+    public Book(String bookID, String title, String author, String publisher,
+                int yearPublished, String category, int quantity) {
         this.bookID = bookID;
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.yearPublished = yearPublished;
         this.category = category;
+        this.quantity = quantity;
     }
 
-    // Getters and Setters
+    // Getters và Setters
     public String getBookID() { return bookID; }
     public void setBookID(String bookID) { this.bookID = bookID; }
 
@@ -41,15 +43,16 @@ public class Book {
     public String getCategory() { return category; }
     public void setCategory(String category) { this.category = category; }
 
-    // CRUD operations (in-memory for demonstration)
+    public int getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+
+    // CRUD in-memory
     private static final List<Book> books = new ArrayList<>();
 
-    // Create
     public static void addBook(Book book) {
         books.add(book);
     }
 
-    // Read
     public static List<Book> getAllBooks() {
         return new ArrayList<>(books);
     }
@@ -58,7 +61,6 @@ public class Book {
         return books.stream().filter(b -> b.getBookID().equals(bookID)).findFirst();
     }
 
-    // Update
     public static boolean updateBook(String bookID, Book updatedBook) {
         Optional<Book> bookOpt = getBookByID(bookID);
         if (bookOpt.isPresent()) {
@@ -68,12 +70,12 @@ public class Book {
             book.setPublisher(updatedBook.getPublisher());
             book.setYearPublished(updatedBook.getYearPublished());
             book.setCategory(updatedBook.getCategory());
+            book.setQuantity(updatedBook.getQuantity());
             return true;
         }
         return false;
     }
 
-    // Delete
     public static boolean deleteBook(String bookID) {
         return books.removeIf(b -> b.getBookID().equals(bookID));
     }

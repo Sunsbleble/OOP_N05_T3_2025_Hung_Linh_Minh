@@ -1,52 +1,40 @@
 package com.example.servingwebcontent.controller;
 
 import com.example.servingwebcontent.model.Member;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/members")
 public class MemberController {
 
     @GetMapping
-    public String listMembers(Model model) {
-        List<Member> members = Member.getAllMembers();
-        model.addAttribute("members", members);
-        return "members";
-    }
+    public List<Member> getAllMembers() { return Member.getAllMembers(); }
 
     @GetMapping("/{id}")
-    public String getMember(@PathVariable("id") String memberID, Model model) {
-        Optional<Member> member = Member.getMemberByID(memberID);
-        member.ifPresent(m -> model.addAttribute("member", m));
-        return "member-detail";
+    public ResponseEntity<Member> getMemberById(@PathVariable String id) {
+        Optional<Member> member = Member.getMemberByID(id);
+        return member.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public String addMember(@RequestParam String memberID,
-                            @RequestParam String name,
-                            @RequestParam String address,
-                            @RequestParam String phone) {
-        Member.addMember(new Member(memberID, name, address, phone));
-        return "redirect:/members";
+    public ResponseEntity<String> addMember(@RequestBody Member member) {
+        Member.addMember(member);
+        return ResponseEntity.ok("Member added successfully");
     }
 
-    @PostMapping("/update")
-    public String updateMember(@RequestParam String memberID,
-                               @RequestParam String name,
-                               @RequestParam String address,
-                               @RequestParam String phone) {
-        Member.updateMember(memberID, name, address, phone);
-        return "redirect:/members";
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateMember(@PathVariable String id, @RequestBody Member updated) {
+        boolean updatedStatus = Member.updateMember(id, updated);
+        return updatedStatus ? ResponseEntity.ok("Member updated") : ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/delete")
-    public String deleteMember(@RequestParam String memberID) {
-        Member.deleteMember(memberID);
-        return "redirect:/members";
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteMember(@PathVariable String id) {
+        boolean deleted = Member.deleteMember(id);
+        return deleted ? ResponseEntity.ok("Member deleted") : ResponseEntity.notFound().build();
     }
 }
