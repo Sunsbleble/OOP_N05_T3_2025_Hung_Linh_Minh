@@ -7,7 +7,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/fines")
-public class FineController {
+public class LoanController {
 
     @GetMapping
     public List<Fine> getAllFines() {
