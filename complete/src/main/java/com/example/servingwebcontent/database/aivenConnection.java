@@ -17,7 +17,7 @@ public class aivenConnection {
             reset = sta.executeQuery("select * from sach");
             System.out.println("Hiển thị dữ liệu sách từ database: ");
             while (reset.next()) {
-                String masach = reset.getString("BookID");
+                String masach = reset.getString("bookID");
                 String tensach = reset.getString("title");
                 String tacgia = reset.getString("author");
                 System.out.println("Mã sách: " + masach + " | Tên sách: " + tensach + " | Tác giả: " + tacgia);
