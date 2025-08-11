@@ -22,6 +22,10 @@ public class Loan {
         this.borrowedBooks = new ArrayList<>();
     }
 
+    public Loan(String maLoan, String tenLoan, double soTien, double laiSuat) {
+        
+    }
+
     // Getters and Setters
     public String getLoanID() {
         return loanID;
