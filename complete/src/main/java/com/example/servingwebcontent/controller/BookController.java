@@ -1,42 +1,57 @@
 package com.example.servingwebcontent.controller;
 
+import com.example.servingwebcontent.database.BookAivenRepository;
 import com.example.servingwebcontent.model.Book;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-
-@RestController
+@Controller
 @RequestMapping("/books")
 public class BookController {
 
+    private final BookAivenRepository repo;
+
+    public BookController(BookAivenRepository repo) {
+        this.repo = repo;
+    }
+
     @GetMapping
-    public List<Book> getAllBooks() {
-        return Book.getAllBooks();
+    public String listBooks(Model model) {
+        model.addAttribute("books", repo.findAll());
+        return "books"; // template books.html
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable String id) {
-        Optional<Book> bookOpt = Book.getBookByID(id);
-        return bookOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @PostMapping("/add")
+    public String addBook(@RequestParam String bookID,
+                          @RequestParam String title,
+                          @RequestParam(required = false) String author,
+                          @RequestParam(required = false) String publisher,
+                          @RequestParam(required = false, defaultValue = "0") int yearPublished,
+                          @RequestParam(required = false) String category,
+                          @RequestParam(required = false, defaultValue = "1") int quantity,
+                          Model model) {
+        Book b = new Book(bookID, title, author, publisher, yearPublished, category, quantity);
+        repo.save(b);
+        return "redirect:/books";
     }
 
-    @PostMapping
-    public ResponseEntity<String> addBook(@RequestBody Book book) {
-        Book.addBook(book);
-        return ResponseEntity.ok("Book added successfully");
+    @PostMapping("/update/{id}")
+    public String updateBook(@PathVariable("id") String id,
+                             @RequestParam String title,
+                             @RequestParam(required = false) String author,
+                             @RequestParam(required = false) String publisher,
+                             @RequestParam(required = false, defaultValue = "0") int yearPublished,
+                             @RequestParam(required = false) String category,
+                             @RequestParam(required = false, defaultValue = "1") int quantity) {
+        Book b = new Book(id, title, author, publisher, yearPublished, category, quantity);
+        repo.update(id, b);
+        return "redirect:/books";
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<String> updateBook(@PathVariable String id, @RequestBody Book updatedBook) {
-        boolean updated = Book.updateBook(id, updatedBook);
-        return updated ? ResponseEntity.ok("Book updated successfully") : ResponseEntity.notFound().build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteBook(@PathVariable String id) {
-        boolean deleted = Book.deleteBook(id);
-        return deleted ? ResponseEntity.ok("Book deleted successfully") : ResponseEntity.notFound().build();
+    @GetMapping("/delete/{id}")
+    public String deleteBook(@PathVariable String id) {
+        repo.delete(id);
+        return "redirect:/books";
     }
 }

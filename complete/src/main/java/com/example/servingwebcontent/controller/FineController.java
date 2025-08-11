@@ -1,40 +1,86 @@
 package com.example.servingwebcontent.controller;
 
-import com.example.servingwebcontent.model.Fine;
-import org.springframework.http.ResponseEntity;
+import com.example.servingwebcontent.database.LoanAivenRepository;
+import com.example.servingwebcontent.database.BookAivenRepository;
+import com.example.servingwebcontent.database.MemberAivenRepository;
+import com.example.servingwebcontent.model.Loan;
+import com.example.servingwebcontent.model.Book;
+import com.example.servingwebcontent.model.Member;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
 
-@RestController
-@RequestMapping("/fines")
-public class FineController {
+@Controller
+@RequestMapping("/loans")
+public class LoanController {
 
+    private final LoanAivenRepository repo;
+    private final BookAivenRepository bookRepo;
+    private final MemberAivenRepository memberRepo;
+
+    public LoanController(LoanAivenRepository repo,
+                          BookAivenRepository bookRepo,
+                          MemberAivenRepository memberRepo) {
+        this.repo = repo;
+        this.bookRepo = bookRepo;
+        this.memberRepo = memberRepo;
+    }
+
+    // Trang danh sách mượn sách
     @GetMapping
-    public List<Fine> getAllFines() { return Fine.getAllFines(); }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Fine> getFineById(@PathVariable String id) {
-        Optional<Fine> fine = Fine.getFineByID(id);
-        return fine.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public String list(Model model) {
+        model.addAttribute("loans", repo.findAll());
+        model.addAttribute("books", bookRepo.findAll());
+        model.addAttribute("members", memberRepo.findAll());
+        return "loans"; // loans.html
     }
 
-    @PostMapping
-    public ResponseEntity<String> addFine(@RequestBody Fine fine) {
-        Fine.addFine(fine);
-        return ResponseEntity.ok("Fine added successfully");
+    // Thêm mượn sách mới
+    @PostMapping("/add")
+    public String add(@RequestParam String loanID,
+                      @RequestParam String bookID,
+                      @RequestParam String memberID,
+                      @RequestParam String borrowDate,
+                      @RequestParam(required = false) String returnDate) {
+        Book book = bookRepo.findById(bookID).orElse(null);
+        Member member = memberRepo.findById(memberID).orElse(null);
+        Loan loan = new Loan(
+                loanID,
+                book,
+                member,
+                LocalDate.parse(borrowDate),
+                (returnDate == null || returnDate.isEmpty()) ? null : LocalDate.parse(returnDate)
+        );
+        repo.save(loan);
+        return "redirect:/loans";
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<String> updateFine(@PathVariable String id, @RequestBody Fine updated) {
-        boolean updatedStatus = Fine.updateFine(id, updated);
-        return updatedStatus ? ResponseEntity.ok("Fine updated") : ResponseEntity.notFound().build();
+    // Cập nhật thông tin mượn sách
+    @PostMapping("/update/{id}")
+    public String update(@PathVariable String id,
+                         @RequestParam String bookID,
+                         @RequestParam String memberID,
+                         @RequestParam String borrowDate,
+                         @RequestParam(required = false) String returnDate) {
+        Book book = bookRepo.findById(bookID).orElse(null);
+        Member member = memberRepo.findById(memberID).orElse(null);
+        Loan loan = new Loan(
+                id,
+                book,
+                member,
+                LocalDate.parse(borrowDate),
+                (returnDate == null || returnDate.isEmpty()) ? null : LocalDate.parse(returnDate)
+        );
+        repo.update(id, loan);
+        return "redirect:/loans";
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteFine(@PathVariable String id) {
-        boolean deleted = Fine.deleteFine(id);
-        return deleted ? ResponseEntity.ok("Fine deleted") : ResponseEntity.notFound().build();
+    // Xóa mượn sách
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable String id) {
+        repo.delete(id);
+        return "redirect:/loans";
     }
 }

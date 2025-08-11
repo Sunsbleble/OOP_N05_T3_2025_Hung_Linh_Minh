@@ -1,40 +1,70 @@
 package com.example.servingwebcontent.controller;
 
+import com.example.servingwebcontent.database.LoanAivenRepository;
+import com.example.servingwebcontent.database.BookAivenRepository;
+import com.example.servingwebcontent.database.MemberAivenRepository;
 import com.example.servingwebcontent.model.Loan;
-import org.springframework.http.ResponseEntity;
+import com.example.servingwebcontent.model.Book;
+import com.example.servingwebcontent.model.Member;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
 
-@RestController
+@Controller
 @RequestMapping("/loans")
 public class LoanController {
 
+    private final LoanAivenRepository repo;
+    private final BookAivenRepository bookRepo;
+    private final MemberAivenRepository memberRepo;
+
+    public LoanController(LoanAivenRepository repo, BookAivenRepository bookRepo, MemberAivenRepository memberRepo) {
+        this.repo = repo;
+        this.bookRepo = bookRepo;
+        this.memberRepo = memberRepo;
+    }
+
     @GetMapping
-    public List<Loan> getAllLoans() { return Loan.getAllLoans(); }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Loan> getLoanById(@PathVariable String id) {
-        Optional<Loan> loan = Loan.getLoanByID(id);
-        return loan.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public String list(Model model) {
+        model.addAttribute("loans", repo.findAll());
+        return "loans";
     }
 
-    @PostMapping
-    public ResponseEntity<String> addLoan(@RequestBody Loan loan) {
-        Loan.addLoan(loan);
-        return ResponseEntity.ok("Loan added successfully");
+    @PostMapping("/add")
+    public String add(@RequestParam String loanID,
+                      @RequestParam String bookID,
+                      @RequestParam String memberID,
+                      @RequestParam String borrowDate,
+                      @RequestParam(required = false) String returnDate) {
+        Book book = bookRepo.findById(bookID).orElse(null);
+        Member member = memberRepo.findById(memberID).orElse(null);
+        Loan loan = new Loan(loanID, book, member,
+                LocalDate.parse(borrowDate),
+                (returnDate == null || returnDate.isEmpty()) ? null : LocalDate.parse(returnDate));
+        repo.save(loan);
+        return "redirect:/loans";
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<String> updateLoan(@PathVariable String id, @RequestBody Loan updated) {
-        boolean updatedStatus = Loan.updateLoan(id, updated);
-        return updatedStatus ? ResponseEntity.ok("Loan updated") : ResponseEntity.notFound().build();
+    @PostMapping("/update/{id}")
+    public String update(@PathVariable String id,
+                         @RequestParam String bookID,
+                         @RequestParam String memberID,
+                         @RequestParam String borrowDate,
+                         @RequestParam(required = false) String returnDate) {
+        Book book = bookRepo.findById(bookID).orElse(null);
+        Member member = memberRepo.findById(memberID).orElse(null);
+        Loan loan = new Loan(id, book, member,
+                LocalDate.parse(borrowDate),
+                (returnDate == null || returnDate.isEmpty()) ? null : LocalDate.parse(returnDate));
+        repo.update(id, loan);
+        return "redirect:/loans";
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteLoan(@PathVariable String id) {
-        boolean deleted = Loan.deleteLoan(id);
-        return deleted ? ResponseEntity.ok("Loan deleted") : ResponseEntity.notFound().build();
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable String id) {
+        repo.delete(id);
+        return "redirect:/loans";
     }
 }
