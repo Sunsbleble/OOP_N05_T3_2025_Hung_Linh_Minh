@@ -13,6 +13,19 @@ public class Book {
     private String category;
     private int quantity;
 
+    // In-memory store
+    private static final List<Book> books = new ArrayList<>();
+
+    static {
+        // ví dụ dữ liệu khởi tạo
+        books.add(new Book("B001", "Lập trình Java", "Nguyễn Văn A", "NXB A", 2022, "Công nghệ", 5));
+        books.add(new Book("B002", "Spring Boot Cơ bản", "Trần Thị B", "NXB B", 2023, "Công nghệ", 3));
+    }
+
+    // <-- Thêm constructor không đối số để Thymeleaf / @ModelAttribute có thể khởi tạo -->
+    public Book() {}
+
+    // Constructor đầy đủ
     public Book(String bookID, String title, String author, String publisher,
                 int yearPublished, String category, int quantity) {
         this.bookID = bookID;
@@ -24,37 +37,13 @@ public class Book {
         this.quantity = quantity;
     }
 
-    // Getters và Setters
-    public String getBookID() { return bookID; }
-    public void setBookID(String bookID) { this.bookID = bookID; }
-
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
-
-    public String getAuthor() { return author; }
-    public void setAuthor(String author) { this.author = author; }
-
-    public String getPublisher() { return publisher; }
-    public void setPublisher(String publisher) { this.publisher = publisher; }
-
-    public int getYearPublished() { return yearPublished; }
-    public void setYearPublished(int yearPublished) { this.yearPublished = yearPublished; }
-
-    public String getCategory() { return category; }
-    public void setCategory(String category) { this.category = category; }
-
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
-
     // CRUD in-memory
-    private static final List<Book> books = new ArrayList<>();
-
     public static void addBook(Book book) {
         books.add(book);
     }
 
     public static List<Book> getAllBooks() {
-        return new ArrayList<>(books);
+        return new ArrayList<>(books); // trả bản sao
     }
 
     public static Optional<Book> getBookByID(String bookID) {
@@ -79,4 +68,33 @@ public class Book {
     public static boolean deleteBook(String bookID) {
         return books.removeIf(b -> b.getBookID().equals(bookID));
     }
+
+    // --- Getters & Setters (gốc) ---
+    public String getBookID() { return bookID; }
+    public void setBookID(String bookID) { this.bookID = bookID; }
+
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+
+    public String getAuthor() { return author; }
+    public void setAuthor(String author) { this.author = author; }
+
+    public String getPublisher() { return publisher; }
+    public void setPublisher(String publisher) { this.publisher = publisher; }
+
+    public int getYearPublished() { return yearPublished; }
+    public void setYearPublished(int yearPublished) { this.yearPublished = yearPublished; }
+
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+
+    public int getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+
+    // --- Alias getters/setters để tương thích với template dùng book.id / book.year ---
+    public String getId() { return this.bookID; }
+    public void setId(String id) { this.bookID = id; }
+
+    public int getYear() { return this.yearPublished; }
+    public void setYear(int year) { this.yearPublished = year; }
 }
