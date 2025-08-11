@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyLibrary — Thêm/Sửa Phạt</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent: #1DB954;
+  --bg: #121212;
+  --card: #181818;
+  --text-light: #e0e0e0;
+  --hover-accent: #17a74a;
+}
+html, body { height: 100%; margin: 0; }
+body { 
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text-light);
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+main { flex: 1; }
+.navbar { background: var(--card); }
+.navbar-brand { color: var(--accent) !important; font-weight: 700; }
+.nav-link { color: var(--text-light) !important; }
+.nav-link:hover { color: var(--accent) !important; }
+.btn-primary { background: var(--accent); border: none; }
+.btn-primary:hover { background: var(--hover-accent); }
+footer { background: #101010; color: #aaa; padding: 18px 0; text-align: center; }
+.form-control { background: #222; color: var(--text-light); border: 1px solid #333; }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">📚 MyLibrary</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navMenu" class="collapse navbar-collapse">
+      <div class="ms-auto d-flex gap-2">
+        <a class="nav-link" href="index.html">Trang chủ</a>
+        <a class="nav-link" href="books.html">Sách</a>
+        <a class="nav-link" href="members.html">Người đọc</a>
+        <a class="nav-link" href="loans.html">Mượn sách</a>
+        <a class="nav-link active" href="fines.html">Phạt</a>
+        <a class="nav-link" href="staff.html">Nhân viên</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="container py-5" style="margin-top: 80px;">
+  <h2 style="color: var(--accent);" id="formTitle">
+    <i class="fa-solid fa-money-bill-wave me-2"></i> Thêm Phạt
+  </h2>
+
+  <form id="fineForm" class="mt-4">
+    <div class="mb-3">
+      <label class="form-label">Mã phạt</label>
+      <input type="text" id="fineID" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Người đọc</label>
+      <input type="text" id="member" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Số tiền</label>
+      <input type="number" id="amount" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Lý do</label>
+      <input type="text" id="reason" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">
+      <i class="fa-solid fa-save me-1"></i> Lưu
+    </button>
+    <a href="fines.html" class="btn btn-secondary">Hủy</a>
+  </form>
+</main>
+
+<footer>
+  <div class="container">
+    <p class="mb-0">© 2025 MyLibrary</p>
+  </div>
+</footer>
+
+<script>
+function getFines() {
+  return JSON.parse(localStorage.getItem("fines")) || [];
+}
+function saveFines(data) {
+  localStorage.setItem("fines", JSON.stringify(data));
+}
+
+const form = document.getElementById("fineForm");
+const params = new URLSearchParams(window.location.search);
+const editIndex = params.get("edit");
+
+if (editIndex !== null) {
+  const fines = getFines();
+  const fine = fines[editIndex];
+  document.getElementById("formTitle").innerHTML = '<i class="fa-solid fa-money-bill-wave me-2"></i> Sửa Phạt';
+  document.getElementById("fineID").value = fine.fineID;
+  document.getElementById("member").value = fine.member;
+  document.getElementById("amount").value = fine.amount;
+  document.getElementById("reason").value = fine.reason;
+}
+
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+  let fines = getFines();
+  const newFine = {
+    fineID: document.getElementById("fineID").value.trim(),
+    member: document.getElementById("member").value.trim(),
+    amount: document.getElementById("amount").value.trim(),
+    reason: document.getElementById("reason").value.trim()
+  };
+  
+  if (editIndex !== null) {
+    fines[editIndex] = newFine;
+  } else {
+    fines.push(newFine);
+  }
+  
+  saveFines(fines);
+  window.location.href = "fines.html";
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
