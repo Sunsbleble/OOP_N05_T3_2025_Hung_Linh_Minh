@@ -1,81 +1,36 @@
 package com.example.servingwebcontent.controller;
 
-import com.example.servingwebcontent.model.Loan;
-import com.example.servingwebcontent.model.Book;
-import com.example.servingwebcontent.model.Member;
+import com.example.servingwebcontent.model.Fine;
 import org.springframework.web.bind.annotation.*;
-import java.time.LocalDate;
+
 import java.util.*;
 
-
-
 @RestController
-@RequestMapping("/loans")
-public class LoanController {
-
-    private final Map<String, Loan> loanMap = new HashMap<>();
+@RequestMapping("/fines")
+public class FineController {
 
     @GetMapping
-    public List<Loan> getAllLoans() {
-        return new ArrayList<>(loanMap.values());
+    public List<Fine> getAllFines() {
+        return new ArrayList<>(Fine.fines.values());
     }
 
-    @GetMapping("/{loanID}")
-    public Loan getLoan(@PathVariable String loanID) {
-        return loanMap.get(loanID);
+    @GetMapping("/{fineID}")
+    public Fine getFine(@PathVariable String fineID) {
+        return Fine.getFine(fineID);
     }
 
     @PostMapping
-    public Loan createLoan(@RequestBody Loan loan) {
-        loanMap.put(loan.getLoanID(), loan);
-        return loan;
+    public Fine createFine(@RequestBody Fine fine) {
+        return Fine.createFine(fine.getMember(), fine.getAmount(), fine.getReason());
     }
 
-    @PutMapping("/{loanID}")
-    public Loan updateLoan(@PathVariable String loanID, @RequestBody Loan updatedLoan) {
-        loanMap.put(loanID, updatedLoan);
-        return updatedLoan;
+    @PutMapping("/{fineID}")
+    public boolean updateFine(@PathVariable String fineID, @RequestBody Fine fine) {
+        return Fine.updateFine(fineID, fine.getMember(), fine.getAmount(), fine.getReason());
     }
 
-    @DeleteMapping("/{loanID}")
-    public void deleteLoan(@PathVariable String loanID) {
-        loanMap.remove(loanID);
-    }
-
-    // CRUD for borrowedBooks in a Loan
-    @PostMapping("/{loanID}/books")
-    public Loan addBorrowedBook(@PathVariable String loanID, @RequestBody Book book) {
-        Loan loan = loanMap.get(loanID);
-        if (loan != null) {
-            loan.addBorrowedBook(book);
-        }
-        return loan;
-    }
-
-    @DeleteMapping("/{loanID}/books/{index}")
-    public Loan removeBorrowedBook(@PathVariable String loanID, @PathVariable int index) {
-        Loan loan = loanMap.get(loanID);
-        if (loan != null) {
-            loan.removeBorrowedBook(index);
-        }
-        return loan;
-    }
-
-    @PutMapping("/{loanID}/books/{index}")
-    public Loan updateBorrowedBook(@PathVariable String loanID, @PathVariable int index, @RequestBody Book book) {
-        Loan loan = loanMap.get(loanID);
-        if (loan != null) {
-            loan.updateBorrowedBook(index, book);
-        }
-        return loan;
-    }
-
-    @GetMapping("/{loanID}/books")
-    public List<Book> getBorrowedBooks(@PathVariable String loanID) {
-        Loan loan = loanMap.get(loanID);
-        if (loan != null) {
-            return loan.getBorrowedBooks();
-        }
-        return Collections.emptyList();
+    @DeleteMapping("/{fineID}")
+    public boolean deleteFine(@PathVariable String fineID) {
+        return Fine.deleteFine(fineID);
     }
 }
