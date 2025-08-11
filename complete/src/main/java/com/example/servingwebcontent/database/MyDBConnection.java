@@ -8,7 +8,7 @@ import java.sql.Statement;
 import org.springframework.beans.factory.annotation.Value;
 
 @Component
-public class myDBConnection {
+public class MyDBConnection {
 
     @Value("${my.database.url}")
     private String myDatabaseURL;
@@ -22,7 +22,7 @@ public class myDBConnection {
     @Value("${my.database.password}")
     private String myDatabasePassword;
 
-    public myDBConnection() {
+    public MyDBConnection() {
         // Fallback values if properties are not loaded
         if (myDatabaseURL == null) {
             myDatabaseURL = "jdbc:mysql://avnadmin:AVNS_RE3O2bhYZ_1_6ER7YK7@mysql-14737a33-nglthu-4e05.k.aivencloud.com:17237/defaultdb?ssl-mode=REQUIRED";

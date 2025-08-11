@@ -9,7 +9,7 @@ public class aivenConnection {
     public void aivenConn() {
                 Connection conn = null;
         try {
-            myDBConnection mydb = new myDBConnection();
+            MyDBConnection mydb = new MyDBConnection();
             conn = mydb.getOnlyConn();
             Statement sta = conn.createStatement();
             ResultSet reset = sta.executeQuery("select * from phim");
