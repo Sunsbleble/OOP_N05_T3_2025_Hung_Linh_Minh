@@ -3,105 +3,96 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Form Sách</title>
+<title>MyLibrary — Thêm/Sửa Sách</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
-  body { 
-    background: #121212; 
-    color: white; 
-    font-family: 'Roboto', sans-serif;
-  }
-  .card { 
-    background: #181818; 
-    border: none; 
-  }
-  h3 {
-    color: #fff;
-    font-weight: 700;
-  }
-  label {
-    color: #ccc;
-    font-weight: 500;
-    margin-bottom: 5px;
-  }
-  .form-control {
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #444;
-  }
-  .form-control:focus {
-    background-color: #fff;
-    color: #000;
-    border-color: #1DB954;
-    box-shadow: none;
-  }
-  .btn-primary { 
-    background: #1DB954; 
-    border: none; 
-  }
-  .btn-primary:hover { 
-    background: #17a74a; 
-  }
+:root {
+  --accent: #1DB954;
+  --bg: #121212;
+  --card: #181818;
+  --text-light: #e0e0e0;
+  --hover-accent: #17a74a;
+}
+html, body { height: 100%; margin: 0; }
+body { display: flex; flex-direction: column; background: var(--bg); color: var(--text-light); font-family: Arial, sans-serif; }
+main { flex: 1; }
+.navbar { background: var(--card); }
+.navbar-brand { color: var(--accent) !important; font-weight: 700; }
+.nav-link { color: var(--text-light) !important; }
+.nav-link:hover { color: var(--accent) !important; }
+.btn-primary { background: var(--accent); border: none; }
+.btn-primary:hover { background: var(--hover-accent); }
+footer { background: #101010; color: #aaa; padding: 18px 0; text-align: center; }
+.form-control { background: #222; color: var(--text-light); border: 1px solid #333; }
 </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg fixed-top" style="background: #181818;">
+<nav class="navbar navbar-expand-lg fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="index.html" style="color: #1DB954; font-weight: 700;">📚 MyLibrary</a>
+    <a class="navbar-brand" href="index.html">📚 MyLibrary</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div id="navMenu" class="collapse navbar-collapse">
       <div class="ms-auto d-flex gap-2">
-        <a class="nav-link" style="color: white;" href="index.html">Trang chủ</a>
-        <a class="nav-link" style="color: white;" href="books.html">Sách</a>
-        <a class="nav-link" style="color: white;" href="members.html">Người đọc</a>
-        <a class="nav-link" style="color: white;" href="loans.html">Mượn sách</a>
-        <a class="nav-link" style="color: white;" href="fines.html">Phạt</a>
-        <a class="nav-link" style="color: white;" href="staff.html">Nhân viên</a>
+        <a class="nav-link" href="index.html">Trang chủ</a>
+        <a class="nav-link active" href="books.html">Sách</a>
+        <a class="nav-link" href="members.html">Người đọc</a>
+        <a class="nav-link" href="loans.html">Mượn sách</a>
+        <a class="nav-link" href="fines.html">Phạt</a>
+        <a class="nav-link" href="staff.html">Nhân viên</a>
       </div>
     </div>
   </div>
 </nav>
 
-<div class="container py-5" style="margin-top: 80px;">
-  <div class="card p-4">
-    <h3 id="formTitle">Thêm Sách</h3>
-    <form id="bookForm">
-      <div class="mb-3">
-        <label>Mã sách</label>
-        <input type="text" class="form-control" id="bookID" required>
-      </div>
-      <div class="mb-3">
-        <label>Tên sách</label>
-        <input type="text" class="form-control" id="title" required>
-      </div>
-      <div class="mb-3">
-        <label>Tác giả</label>
-        <input type="text" class="form-control" id="author">
-      </div>
-      <div class="mb-3">
-        <label>Nhà xuất bản</label>
-        <input type="text" class="form-control" id="publisher">
-      </div>
-      <div class="mb-3">
-        <label>Năm XB</label>
-        <input type="number" class="form-control" id="yearPublished">
-      </div>
-      <div class="mb-3">
-        <label>Thể loại</label>
-        <input type="text" class="form-control" id="category">
-      </div>
-      <div class="mb-3">
-        <label>Số lượng</label>
-        <input type="number" class="form-control" id="quantity">
-      </div>
-      <button class="btn btn-primary" type="submit">Lưu</button>
-      <a href="books.html" class="btn btn-secondary">Hủy</a>
-    </form>
+<main class="container py-5" style="margin-top: 80px;">
+  <h2 style="color: var(--accent);" id="formTitle">
+    <i class="fa-solid fa-book me-2"></i> Thêm Sách
+  </h2>
+
+  <form id="bookForm" class="mt-4">
+    <div class="mb-3">
+      <label class="form-label">Mã sách</label>
+      <input type="text" class="form-control" id="bookID" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Tên sách</label>
+      <input type="text" class="form-control" id="title" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Tác giả</label>
+      <input type="text" class="form-control" id="author">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Nhà xuất bản</label>
+      <input type="text" class="form-control" id="publisher">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Năm XB</label>
+      <input type="number" class="form-control" id="yearPublished">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Thể loại</label>
+      <input type="text" class="form-control" id="category">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Số lượng</label>
+      <input type="number" class="form-control" id="quantity">
+    </div>
+    <button class="btn btn-primary" type="submit">
+      <i class="fa-solid fa-save me-1"></i> Lưu
+    </button>
+    <a href="books.html" class="btn btn-secondary">Hủy</a>
+  </form>
+</main>
+
+<footer>
+  <div class="container">
+    <p class="mb-0">© 2025 MyLibrary</p>
   </div>
-</div>
+</footer>
 
 <script>
 function getBooks() {
@@ -117,7 +108,7 @@ const editIndex = params.get("edit");
 let books = getBooks();
 
 if (editIndex !== null) {
-  document.getElementById("formTitle").innerText = "Sửa Sách";
+  document.getElementById("formTitle").innerHTML = '<i class="fa-solid fa-book me-2"></i> Sửa Sách';
   let book = books[editIndex];
   document.getElementById("bookID").value = book.bookID;
   document.getElementById("title").value = book.title;
@@ -131,13 +122,13 @@ if (editIndex !== null) {
 document.getElementById("bookForm").addEventListener("submit", function(e) {
   e.preventDefault();
   let newBook = {
-    bookID: document.getElementById("bookID").value,
-    title: document.getElementById("title").value,
-    author: document.getElementById("author").value,
-    publisher: document.getElementById("publisher").value,
-    yearPublished: document.getElementById("yearPublished").value,
-    category: document.getElementById("category").value,
-    quantity: document.getElementById("quantity").value
+    bookID: document.getElementById("bookID").value.trim(),
+    title: document.getElementById("title").value.trim(),
+    author: document.getElementById("author").value.trim(),
+    publisher: document.getElementById("publisher").value.trim(),
+    yearPublished: document.getElementById("yearPublished").value.trim(),
+    category: document.getElementById("category").value.trim(),
+    quantity: document.getElementById("quantity").value.trim()
   };
 
   if (editIndex !== null) {
@@ -150,5 +141,6 @@ document.getElementById("bookForm").addEventListener("submit", function(e) {
   window.location.href = "books.html";
 });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
