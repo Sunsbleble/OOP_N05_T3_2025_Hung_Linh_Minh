@@ -15,17 +15,23 @@
   --hover-accent: #17a74a;
 }
 html, body { height: 100%; margin: 0; }
-body { display: flex; flex-direction: column; background: var(--bg); color: var(--text-light); font-family: Arial, sans-serif; }
+body {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text-light);
+  font-family: Arial, sans-serif;
+}
 main { flex: 1; }
 .navbar { background: var(--card); }
-.navbar-brand { color: var(--accent) !important; font-weight: 700; }
+.navbar-brand { color: var(--accent) !important; font-weight: 700; } /* MyLibrary giữ xanh */
 .nav-link { color: var(--text-light) !important; }
-.nav-link:hover { color: var(--accent) !important; }
+.nav-link:hover { color: var(--text-light) !important; }
 .btn-primary { background: var(--accent); border: none; }
 .btn-primary:hover { background: var(--hover-accent); }
 footer { background: #101010; color: #aaa; padding: 18px 0; text-align: center; }
 .table { background: var(--card); color: var(--text-light); }
-.table th { color: var(--accent); }
+.table th { color: var(--text-light); }
 </style>
 </head>
 <body>
