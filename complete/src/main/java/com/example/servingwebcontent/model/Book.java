@@ -15,13 +15,6 @@ public class Book {
 
     // In-memory store
     private static final List<Book> books = new ArrayList<>();
-
-    static {
-        // ví dụ dữ liệu khởi tạo
-        books.add(new Book("B001", "Lập trình Java", "Nguyễn Văn A", "NXB A", 2022, "Công nghệ", 5));
-        books.add(new Book("B002", "Spring Boot Cơ bản", "Trần Thị B", "NXB B", 2023, "Công nghệ", 3));
-    }
-
     // <-- Thêm constructor không đối số để Thymeleaf / @ModelAttribute có thể khởi tạo -->
     public Book() {}
 
