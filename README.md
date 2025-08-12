@@ -16,6 +16,13 @@ Membercrud:
 LoanCRUD:
 <img width="926" height="706" alt="Untitled" src="https://github.com/user-attachments/assets/9e888296-ea51-4f53-92c8-be65c93d00e6" />
 
+Fine:
+<img width="317" height="513" alt="image" src="https://github.com/user-attachments/assets/67a0e96c-1df0-4a21-91f4-664c04a35794" />
+
+Staff:
+<img width="510" height="555" alt="image" src="https://github.com/user-attachments/assets/7b67c137-a656-4015-b0d5-ab384481778a" />
+
+
 
 
 # Describe and Analyse the Project
