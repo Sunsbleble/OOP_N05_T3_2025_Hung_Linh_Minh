@@ -77,7 +77,9 @@ Staff:
 + Số tiền phạt (amount): Số tiền phạt.
 
 + Lý do (reason): Lý do phạt (ví dụ: trả sách trễ).
+
 ### 5. Quản Lý (Staff)
+
 + Mã nhân viên – định danh duy nhất cho mỗi nhân viên
 
 + Họ và tên – tên đầy đủ của nhân viên
@@ -87,6 +89,9 @@ Staff:
 + Số điện thoại – liên hệ nội bộ hoặc với thành viên
 
 + Email – dùng cho trao đổi, thông báo
+
+### Demo Test:
+https://www.youtube.com/watch?v=CgWpFfLPzQ8
 
 # Thành viên:
 1. Trần Gia Hưng, MSV: 24100078
