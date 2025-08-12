@@ -2,7 +2,8 @@
 Ứng dụng quản lý sách thư viện
 
 ## Sơ đồ chức năng:
-<img width="603" height="379" alt="Untitled (1)" src="https://github.com/user-attachments/assets/95a95a80-605d-402f-8ee9-b737d1a094bf" />
+<img width="638" height="447" alt="image" src="https://github.com/user-attachments/assets/d6ca997e-c95c-4cdf-b92d-210d16ddf89c" />
+
 
 
 ## Sơ đồ thuật toán:
