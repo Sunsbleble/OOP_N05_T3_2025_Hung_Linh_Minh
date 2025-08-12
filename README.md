@@ -1,5 +1,5 @@
 # OOP_N05_T3_2025_GROUP_Hung_Linh_Minh
-Ứng dụng quản lý sách thư viện
+Ứng dụng quản lý sách thư viện tổ dân phố Kiến Hưng
 
 ## Sơ đồ chức năng:
 <img width="638" height="447" alt="image" src="https://github.com/user-attachments/assets/d6ca997e-c95c-4cdf-b92d-210d16ddf89c" />
